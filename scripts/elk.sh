@@ -60,7 +60,7 @@ sed -i "s/es1/es3/g" $PROJ_DIR/node3/stop.sh
 chown -Rf vagrant:vagrant $PROJ_DIR
 
 echo "run all 3 nodes!"
-$PROJ_DIR/startall.sh
+sudo -u vagrant $PROJ_DIR/startall.sh
 
 ### [install elasticsearch-kopf] ############################################################################################################
 $PROJ_DIR/node1/bin/plugin install lmenezes/elasticsearch-kopf/2.1.1
