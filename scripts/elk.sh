@@ -81,7 +81,7 @@ mkdir $PROJ_DIR/logstash-2.2.2/patterns
 mkdir $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/patterns/nginx $PROJ_DIR/logstash-2.2.2/patterns
 cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
-#cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
+cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
 
 chown -Rf vagrant:vagrant $PROJ_DIR
 
