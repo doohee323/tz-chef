@@ -19,6 +19,8 @@ sudo apt-get install openjdk-8-jdk curl -y
 sudo apt-get install nginx -y
 sudo apt-get install systemd-services -y
 
+git clone https://github.com/Sodacrew/SodaTransferELK.git
+
 ### [install elasticsearch] ############################################################################################################
 cd $PROJ_DIR
 rm -Rf node1 node2 node3
@@ -96,6 +98,7 @@ mkdir $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/patterns/nginx $PROJ_DIR/logstash-2.2.2/patterns
 cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/log_list/test1_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/test1.conf
+cp $SRC_DIR/logstash/log_list/test2_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/test2.conf
 
 chown -Rf ubuntu:ubuntu $PROJ_DIR
 
