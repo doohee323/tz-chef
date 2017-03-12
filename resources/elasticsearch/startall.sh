@@ -1,4 +1,4 @@
-export PROJ_DIR=/home/vagrant
+export PROJ_DIR=/home/ubuntu
 
 cd $PROJ_DIR 
 echo cd $PROJ_DIR

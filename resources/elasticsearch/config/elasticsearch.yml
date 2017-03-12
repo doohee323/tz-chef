@@ -22,7 +22,7 @@ cluster.name: tzelk
 #
 node.name: node1
 node.master: true
-node.data: true
+node.data: false
 #
 # Add custom attributes to the node:
 #

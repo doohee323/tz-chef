@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PROJ_DIR=/home/vagrant
+export PROJ_DIR=/home/ubuntu
 
 ES=$PROJ_DIR/node1
 kill `cat < $ES/bin/es1.pid`

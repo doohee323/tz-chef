@@ -2,8 +2,8 @@
 
 set -x
 
-export SRC_DIR=/vagrant/resources
-export PROJ_DIR=/home/vagrant
+export SRC_DIR=/ubuntu/resources
+export PROJ_DIR=/home/ubuntu
 
 # remove es index
 curl -XDELETE 'http://192.168.82.170:9200/test1'
