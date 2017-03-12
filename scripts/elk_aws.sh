@@ -100,12 +100,9 @@ cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/log_list/test1_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/test1.conf
 cp $SRC_DIR/logstash/log_list/test2_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/test2.conf
 
-chown -Rf ubuntu:ubuntu $PROJ_DIR
-
 sudo -u ubuntu $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
 sudo -u ubuntu $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
-
-#sudo $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test2.conf &
+sudo -u ubuntu $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test2.conf &
 
 ### [install kibana] ############################################################################################################
 cd $PROJ_DIR
