@@ -108,6 +108,9 @@ tar xzvf kibana-4.4.1-linux-x64.tar.gz
 
 chown -Rf ubuntu:ubuntu $PROJ_DIR
 
+echo '' >> $PROJ_DIR/kibana-4.4.1-linux-x64/config/kibana.yml
+echo 'elasticsearch.url: "http://$1:9200"' >> $PROJ_DIR/kibana-4.4.1-linux-x64/config/kibana.yml
+
 sudo -u ubuntu $PROJ_DIR/kibana-4.4.1-linux-x64/bin/kibana > /dev/null 2>&1 &
 # http://localhost:5601
 

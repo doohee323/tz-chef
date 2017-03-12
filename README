@@ -55,7 +55,8 @@ This is a ELK example on vagrant.
 ``` 
 	git clone https://github.com/Sodacrew/SodaTransferELK.git
 	cd ~/SodaTransferELK/scripts
-	bash elk_aws.sh
+	bash elk_aws.sh <aws public ip address>
+	# cf. bash elk_aws.sh 13.124.60.16 
 	
 	cd ~
 	bash startall.sh 
