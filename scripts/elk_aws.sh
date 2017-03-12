@@ -31,10 +31,10 @@ cp $SRC_DIR/elasticsearch/stop.sh $PROJ_DIR/node1
 cp $SRC_DIR/elasticsearch/startall.sh $PROJ_DIR
 cp $SRC_DIR/elasticsearch/stopall.sh $PROJ_DIR
 
-sed -i "s/vagrant/ubuntu/g" $SRC_DIR/elasticsearch/start.sh
-sed -i "s/vagrant/ubuntu/g" $SRC_DIR/elasticsearch/stop.sh
-sed -i "s/vagrant/ubuntu/g" $SRC_DIR/elasticsearch/startall.sh
-sed -i "s/vagrant/ubuntu/g" $SRC_DIR/elasticsearch/stopall.sh
+sed -i "s/vagrant/ubuntu/g" $PROJ_DIR/node1/start.sh
+sed -i "s/vagrant/ubuntu/g" $PROJ_DIR/node1/stop.sh
+sed -i "s/vagrant/ubuntu/g" $PROJ_DIR/startall.sh
+sed -i "s/vagrant/ubuntu/g" $PROJ_DIR/stopall.sh
 
 chmod 777 $PROJ_DIR/node1/*.sh
 chmod 777 $PROJ_DIR/*.sh
@@ -61,6 +61,7 @@ sed -i "s/9200/9203/g" $PROJ_DIR/node3/config/elasticsearch.yml
 
 sed -i "s/node1/node3/g" $PROJ_DIR/node3/start.sh
 sed -i "s/es1/es3/g" $PROJ_DIR/node3/start.sh
+
 sed -i "s/node1/node3/g" $PROJ_DIR/node3/stop.sh
 sed -i "s/es1/es3/g" $PROJ_DIR/node3/stop.sh
 
@@ -93,7 +94,7 @@ mkdir $PROJ_DIR/logstash-2.2.2/patterns
 mkdir $PROJ_DIR/logstash-2.2.2/log_list
 cp $SRC_DIR/logstash/patterns/nginx $PROJ_DIR/logstash-2.2.2/patterns
 cp $SRC_DIR/logstash/log_list/nginx.conf $PROJ_DIR/logstash-2.2.2/log_list
-cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
+cp $SRC_DIR/logstash/log_list/test1_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/test1.conf
 
 chown -Rf ubuntu:ubuntu $PROJ_DIR
 

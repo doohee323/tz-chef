@@ -54,11 +54,13 @@ This is a ELK example on vagrant.
 # install all on AWS
 ``` 
 	git clone https://github.com/Sodacrew/SodaTransferELK.git
-	cd ~/SodaTransferELK/script
+	cd ~/SodaTransferELK/scripts
 	bash elk_aws.sh
 	
-	cd ~/SodaTransferELK/resources/elasticsearch
-	bash startall.sh # stopall.sh
+	cd ~
+	bash startall.sh 
+	# bash stopall.sh
 	
-	bash elk_aws.sh
+	cd ~/SodaTransferELK/scripts 
+	bash elk_test_aws.sh
 ```
