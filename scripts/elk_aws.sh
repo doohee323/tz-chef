@@ -67,13 +67,13 @@ sed -i "s/es1/es3/g" $PROJ_DIR/node3/stop.sh
 
 chown -Rf ubuntu:ubuntu $PROJ_DIR
 
-echo "run all 3 nodes!"
-sudo -u ubuntu $PROJ_DIR/startall.sh
-
 ### [install cloud-aws] ############################################################################################################
 $PROJ_DIR/node1/bin/plugin install cloud-aws -b
 $PROJ_DIR/node2/bin/plugin install cloud-aws -b
 $PROJ_DIR/node3/bin/plugin install cloud-aws -b
+
+echo "run all 3 nodes!"
+sudo -u ubuntu $PROJ_DIR/startall.sh
 
 ### [install elasticsearch-kopf] ############################################################################################################
 $PROJ_DIR/node1/bin/plugin install lmenezes/elasticsearch-kopf/2.1.1
