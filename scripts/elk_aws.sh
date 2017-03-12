@@ -17,6 +17,7 @@ source $PROJ_DIR/.bashrc
 sudo apt-get update
 sudo apt-get install openjdk-8-jdk curl -y
 sudo apt-get install nginx -y
+sudo apt-get install systemd-services -y
 
 ### [install elasticsearch] ############################################################################################################
 cd $PROJ_DIR
@@ -99,7 +100,9 @@ cp $SRC_DIR/logstash/log_list/test1_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/t
 chown -Rf ubuntu:ubuntu $PROJ_DIR
 
 sudo -u ubuntu $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
-sudo -u ubuntu #$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
+sudo -u ubuntu $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
+
+#sudo $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test2.conf &
 
 ### [install kibana] ############################################################################################################
 cd $PROJ_DIR
@@ -113,6 +116,12 @@ echo 'elasticsearch.url: "http://$1:9200"' >> $PROJ_DIR/kibana-4.4.1-linux-x64/c
 
 sudo -u ubuntu $PROJ_DIR/kibana-4.4.1-linux-x64/bin/kibana > /dev/null 2>&1 &
 # http://localhost:5601
+
+sudo cp -vp $SRC_DIR/elasticsearch/systemd/system/kibana.service /etc/systemd/system/kibana.service
+sudo chmod 664 /etc/systemd/system/kibana.service
+sudo systemctl daemon-reload
+sudo systemctl enable kibana
+sudo systemctl start kibana
 
 ### [conf nginx] ############################################################################################################
 sudo cp $SRC_DIR/nginx/nginx.conf /etc/nginx/nginx.conf
