@@ -13,7 +13,7 @@ curl -XDELETE 'http://localhost:9200/test1'
 # You can use ruby for handling data in logstash for that, simply use this site for ruby env.
 # https://codepad.remoteinterview.io/BeamingMysteriousRoadOasis
 
-cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
+cp $SRC_DIR/logstash/log_list/test1_aws.conf $PROJ_DIR/logstash-2.2.2/log_list/test1.conf
 $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
 
 # make logstash new data recognized 
