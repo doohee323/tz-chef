@@ -2,11 +2,11 @@
 
 set -x
 
-export SRC_DIR=/vagrant/resources
-export PROJ_DIR=/home/vagrant
+export SRC_DIR=/ubuntu/resources
+export PROJ_DIR=/home/ubuntu
 
 # remove es index
-curl -XDELETE 'http://192.168.82.170:9200/test1'
+curl -XDELETE 'http://localhost:9200/test1'
 
 # run logstash for test1
 # logstash filter -> json / ruby
@@ -20,7 +20,7 @@ $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1
 cp $PROJ_DIR/data/stats-2017-02-22.log $PROJ_DIR/data/stats-2017-02-23.log
 
 # query with hostname
-curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
+curl -XPOST 'http://localhost:9200/test1/_search' -d '
 {
 	  "size" : 10,
     "query" : {
@@ -34,7 +34,7 @@ curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
 # GROUP BY user_id
 # WHERE timestamp A FROM B
 # ORDER BY CNT DESC
-curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
+curl -XPOST 'http://localhost:9200/test1/_search' -d '
 {
   "size": 0,
   "query": {
@@ -62,7 +62,7 @@ curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
 # WHERE timestamp A FROM B
 # ORDER BY CNT DESC
 
-curl -XPOST 'http://192.168.82.170:9200/test1/_search' -d '
+curl -XPOST 'http://localhost:9200/test1/_search' -d '
 {
   "size": 0,
   "query": {

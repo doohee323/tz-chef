@@ -21,8 +21,8 @@ cluster.name: soad-elk
 # Use a descriptive name for the node:
 #
 node.name: node1
-node.master: true
-node.data: false
+#node.master: true
+#node.data: false
 #
 # Add custom attributes to the node:
 #
@@ -53,13 +53,13 @@ node.data: false
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-# network.host: 192.168.0.1
+network.host: 0.0.0.0  # or 172.31.2.83    # <EC2 INSTANCE PRIVATE IP> 
 #
 # Set a custom port for HTTP:
 #
-network.bind_host: 0.0.0.0
-transport.tcp.port: 9300
-transport.tcp.compress: true
+#network.bind_host: 0.0.0.0
+#transport.tcp.port: 9300
+#transport.tcp.compress: true
 http.port: 9200
 http.enabled: true
 #
@@ -72,13 +72,18 @@ http.enabled: true
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
 # discovery.zen.ping.unicast.hosts: ["host1", "host2"]
-discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300","127.0.0.1:9301","127.0.0.1:9302"]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
 #
-discovery.zen.minimum_master_nodes: 3
-discovery.zen.ping.multicast.enabled: false
+#discovery.zen.minimum_master_nodes: 3
+#discovery.zen.ping.multicast.enabled: false
 #
+discovery:
+    type: ec2 
+    ec2:
+        any_group: false                    # optional 
+        groups: soda_ELK # <EC2 SECURITY GROUP ID>   # optional
+
 # For more information, see the documentation at:
 # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>
 #
@@ -101,8 +106,11 @@ discovery.zen.ping.multicast.enabled: false
 #
 # action.destructive_requires_name: true
 
-http.cors.enabled: true
+#http.cors.enabled: true
 #http.cors.allow-origin: /https?:\/\/.*/
-http.cors.allow-origin : "*"
-http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
-http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+#http.cors.allow-origin : "*"
+#http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
+#http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+
+http.jsonp.enable: true
+
