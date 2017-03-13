@@ -4,9 +4,7 @@ set -x
 
 export PROJ_NAME=elk
 export PROJ_DIR=/home/vagrant
-export SRC_DIR=/home/vagrant/resources
-
-# scp -i dev.pem /Users/dhong/Documents/workspace/sts-3.8.3.RELEASE/SodaTransferELK/resources.zip vagrant@13.124.42.39:/home/vagrant
+export SRC_DIR=/vagrant/resources
 
 echo '' >> $PROJ_DIR/.bashrc
 echo 'export PATH=$PATH:.' >> $PROJ_DIR/.bashrc
@@ -85,7 +83,7 @@ cp $SRC_DIR/logstash/log_list/test1.conf $PROJ_DIR/logstash-2.2.2/log_list
 chown -Rf vagrant:vagrant $PROJ_DIR
 
 sudo -u vagrant $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/nginx.conf &
-sudo -u vagrant #$PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
+sudo -u vagrant $PROJ_DIR/logstash-2.2.2/bin/logstash -f $PROJ_DIR/logstash-2.2.2/log_list/test1.conf &
 
 ### [install kibana] ############################################################################################################
 cd $PROJ_DIR
