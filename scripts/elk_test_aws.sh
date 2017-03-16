@@ -2,8 +2,8 @@
 
 set -x
 
-export SRC_DIR=/ubuntu/resources
 export PROJ_DIR=/home/ubuntu
+export SRC_DIR=$PROJ_DIR/ubuntu/resources
 
 # remove es index
 curl -XDELETE 'http://localhost:9200/test1'
