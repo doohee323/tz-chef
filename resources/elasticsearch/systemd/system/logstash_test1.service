@@ -1,0 +1,20 @@
+[Unit]
+Description=logstash_test1 job
+After=network.target
+
+[Service]
+Type=simple
+Environment=JAVA_HOME=/usr/lib/jvm/java-8-oracle
+Environment=HOME=/home/ubuntu
+PIDFile=/home/ubuntu/logstash-2.2.2/logstash_test1.pid
+WorkingDirectory=/home/ubuntu/logstash-2.2.2
+ExecStart=/home/ubuntu/logstash-2.2.2/bin/logstash -f /home/ubuntu/logstash-2.2.2/log_list/test1.conf
+ExecStop=/bin/kill -9 `ps -ef | grep test1.conf | grep -v grep | awk '{print $2}'`
+
+Restart=on-failure
+RestartSec=30
+Group=root
+User=root
+
+[Install]
+WantedBy=default.target

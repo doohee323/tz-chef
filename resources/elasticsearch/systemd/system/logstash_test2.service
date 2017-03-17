@@ -1,0 +1,16 @@
+[Unit]
+Description=logstash_test2 job
+After=network.target
+
+[Service]
+Type=simple
+Environment=JAVA_HOME=/usr/lib/jvm/java-8-oracle
+PIDFile=/home/ubuntu/logstash-2.2.2/logstash_test2.pid
+ExecStart=/usr/lib/jvm/java-8-oracle/bin/java -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -Djava.awt.headless=true -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -Xmx1g -Xss2048k -Djffi.boot.library.path=/home/ubuntu/logstash-2.2.2/vendor/jruby/lib/jni -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -Djava.awt.headless=true -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/ubuntu/logstash-2.2.2/heapdump.hprof -Xbootclasspath/a:/home/ubuntu/logstash-2.2.2/vendor/jruby/lib/jruby.jar -classpath : -Djruby.home=/home/ubuntu/logstash-2.2.2/vendor/jruby -Djruby.lib=/home/ubuntu/logstash-2.2.2/vendor/jruby/lib -Djruby.script=jruby -Djruby.shell=/bin/sh org.jruby.Main --1.9 /home/ubuntu/logstash-2.2.2/lib/bootstrap/environment.rb logstash/runner.rb agent -f /home/ubuntu/logstash-2.2.2/log_list/test2.conf
+ExecStop=/bin/kill -9 `ps -ef | grep test2.conf | grep -v grep | awk '{print $2}'`
+
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target
