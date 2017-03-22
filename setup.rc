@@ -1,3 +1,4 @@
 # DO NOT EDIT - AUTO GENERATED FROM setup.conf
 
-cfg_ip_elk="192.168.82.170"
+cfg_ip_chef.tz.com="192.168.82.170"
+cfg_ip_client.tz.com="192.168.82.171"
