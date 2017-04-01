@@ -18,6 +18,9 @@ echo '' >> /etc/hosts
 echo '192.168.82.170    chef.tz.com' >> /etc/hosts
 echo '192.168.82.171    client.tz.com' >> /etc/hosts
 
+#sed -i "s/vagrant/#vagrant/g" /etc/passwd
+#sudo sh -c "echo 'vagrant:x:1000:1000:vagrant,,,:/vagrant/client:/bin/bash' >> /etc/passwd"
+
 sudo apt-get update
 
 # make ssh key
@@ -38,8 +41,8 @@ sudo chmod -Rf 600 $PROJ_DIR/.ssh/*
 #sudo chmod 600 /etc/chef/client.tz.com.pem
 
 cd $PROJ_DIR
-wget https://packages.chef.io/files/current/chef/12.19.37/ubuntu/16.04/chef_12.19.37-1_amd64.deb
-sudo dpkg -i chef_12.19.37-1_amd64.deb
+wget https://packages.chef.io/files/stable/chef/12.19.36/ubuntu/16.04/chef_12.19.36-1_amd64.deb
+sudo dpkg -i chef_12.19.36-1_amd64.deb
 
 sudo rm -Rf /home/vagrant/chef-repo
 sudo cp -Rf /vagrant/resources/chef-client/chef-repo /home/vagrant
@@ -47,12 +50,12 @@ sudo chown -Rf vagrant:vagrant /home/vagrant/chef-repo
 
 cd /home/vagrant/chef-repo/.chef
 
-# create client
+# 1. create client
 export EDITOR=vi
 knife client create client.tz.com -a -f /home/vagrant/chef-repo/.chef/client.tz.com.pem
 knife client list
 
-# create node
+# 2. create node
 sudo chef-client -c /home/vagrant/chef-repo/.chef/client.rb -N client.tz.com
 
 exit 0

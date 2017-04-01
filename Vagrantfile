@@ -11,10 +11,10 @@ Vagrant.configure("2") do |config|
   $config['ip'].each do | host_name, host_ip |
     config.vm.define "#{host_name}" do |node|
       node.vm.box = "bento/ubuntu-16.04"
-       node.vm.hostname = "#{host_name}"
+      node.vm.hostname = "#{host_name}"
       node.vm.network :private_network, ip: host_ip
       node.vm.provision "shell", :path => File.join(File.dirname(__FILE__),"scripts/#{host_name}.sh"), :args => node.vm.hostname 
-      
+      node.vm.synced_folder "./client", "/home/vagrant/chef-repo"
       node.vm.provider :virtualbox do |vb|
          vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
          vb.customize ["modifyvm", :id, "--memory", "2048"]

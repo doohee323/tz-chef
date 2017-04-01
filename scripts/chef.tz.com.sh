@@ -62,8 +62,8 @@ sudo rm -Rf /vagrant/resources/chef-client/chef-repo/.chef/trusted_certs
 sudo cp -Rf /home/vagrant/.chef/trusted_certs /vagrant/resources/chef-client/chef-repo/.chef
 
 cd $PROJ_DIR
-wget https://packages.chef.io/files/current/chef/12.19.37/ubuntu/16.04/chef_12.19.37-1_amd64.deb
-sudo dpkg -i chef_12.19.37-1_amd64.deb
+wget https://packages.chef.io/files/stable/chef/12.19.36/ubuntu/16.04/chef_12.19.36-1_amd64.deb
+sudo dpkg -i chef_12.19.36-1_amd64.deb
 
 cd /vagrant/resources/chef-client/chef-repo/.chef
 
