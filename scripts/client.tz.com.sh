@@ -59,7 +59,7 @@ knife client list
 sudo chef-client -c /home/vagrant/chef-repo/.chef/client.rb -N client.tz.com
 
 # 3. create a test cookbook
-knife cookbook create sample -o /home/vagrant/chef-repo/cookbooks_test
+# knife cookbook create sample -o /home/vagrant/chef-repo/cookbooks_test
 sudo cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test/sample/recipes/default.rb /home/vagrant/chef-repo/cookbooks_test/sample/recipes/default.rb
 
 # 4. upload the test cookbook
@@ -69,5 +69,12 @@ knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks_test
 knife node run_list add client.tz.com 'recipe[sample]'
 #knife node edit node01
 
+# for run as root account
+sudo rm -Rf /root/.chef
+sudo ln -s /home/vagrant/chef-repo/.chef /root/.chef
+sudo mkdir /etc/chef
+sudo ln -s /home/vagrant/chef-repo/.chef/client.rb /etc/chef/client.rb
+
+sudo chef-client
 
 exit 0
