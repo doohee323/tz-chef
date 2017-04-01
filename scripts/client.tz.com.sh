@@ -60,6 +60,7 @@ knife ssl check
 
 exit 0;
 
+cd /home/vagrant/chef-repo/.chef
 # 1. create a client
 export EDITOR=vi
 knife client create client.tz.com -a -f /home/vagrant/chef-repo/.chef/client.tz.com.pem
@@ -70,7 +71,9 @@ sudo chef-client -c /home/vagrant/chef-repo/.chef/client.rb -N client.tz.com
 
 # 3. create a test cookbook
 # knife cookbook create sample -o /home/vagrant/chef-repo/cookbooks_test
-sudo cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test/sample/recipes/default.rb /home/vagrant/chef-repo/cookbooks_test/sample/recipes/default.rb
+sudo mkdir -p /home/vagrant/chef-repo/cookbooks_test
+sudo rm -Rf /home/vagrant/chef-repo/cookbooks_test/sample
+sudo cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test/sample /home/vagrant/chef-repo/cookbooks_test/sample
 
 # 4. upload the test cookbook
 knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks_test
