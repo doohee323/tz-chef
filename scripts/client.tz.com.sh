@@ -50,6 +50,16 @@ sudo chown -Rf vagrant:vagrant /home/vagrant/chef-repo
 
 cd /home/vagrant/chef-repo/.chef
 
+# for run as root account
+sudo rm -Rf /root/.chef
+sudo ln -s /home/vagrant/chef-repo/.chef /root/.chef
+sudo mkdir /etc/chef
+sudo ln -s /home/vagrant/chef-repo/.chef/client.rb /etc/chef/client.rb
+
+knife ssl check
+
+exit 0;
+
 # 1. create a client
 export EDITOR=vi
 knife client create client.tz.com -a -f /home/vagrant/chef-repo/.chef/client.tz.com.pem
@@ -68,12 +78,6 @@ knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks_test
 # 5. add a recipe to the node(client.tz.com)
 knife node run_list add client.tz.com 'recipe[sample]'
 #knife node edit node01
-
-# for run as root account
-sudo rm -Rf /root/.chef
-sudo ln -s /home/vagrant/chef-repo/.chef /root/.chef
-sudo mkdir /etc/chef
-sudo ln -s /home/vagrant/chef-repo/.chef/client.rb /etc/chef/client.rb
 
 sudo chef-client
 

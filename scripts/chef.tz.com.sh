@@ -25,8 +25,8 @@ echo '192.168.82.171    client.tz.com' >> /etc/hosts
 sudo apt-get update
 
 cd $PROJ_DIR
-wget https://packages.chef.io/files/stable/chef-server/12.13.0/ubuntu/16.04/chef-server-core_12.13.0-1_amd64.deb
-sudo dpkg -i chef-server-core_12.13.0-1_amd64.deb
+wget https://packages.chef.io/files/stable/chef-server/12.14.0/ubuntu/16.04/chef-server-core_12.14.0-1_amd64.deb
+sudo dpkg -i chef-server-core_12.14.0-1_amd64.deb
 sudo chef-server-ctl reconfigure
 
 sudo mkdir -p /vagrant/.ssh
@@ -54,6 +54,8 @@ sudo opscode-reporting-ctl reconfigure --accept-license
 # use trusted_certs
 sudo mkdir -p /home/vagrant/.chef/trusted_certs
 sudo cp /var/opt/opscode/nginx/ca/chef.tz.com.crt /home/vagrant/.chef/trusted_certs
+sudo mkdir -p /home/vagrant/chef-repo/.chef/trusted_certs
+sudo cp /var/opt/opscode/nginx/ca/chef.tz.com.crt /home/vagrant/chef-repo/.chef/trusted_certs
 sudo chown -Rf vagrant:vagrant /home/vagrant/.chef/trusted_certs
 # knife ssl check
 
