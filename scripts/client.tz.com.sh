@@ -84,4 +84,6 @@ knife node run_list add client.tz.com 'recipe[sample]'
 
 sudo chef-client
 
+head /tmp/herp.conf
+
 exit 0
