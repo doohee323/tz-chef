@@ -1,0 +1,9 @@
+{
+	"id": "dev",
+	"name": "test1",
+	"test": {
+		"dev": {
+			"bind_ip": "1.1.1.9"
+		}
+	}
+}

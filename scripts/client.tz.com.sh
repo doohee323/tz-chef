@@ -97,6 +97,11 @@ sed -i "s/ '6'/ '8'/g" /home/vagrant/chef-repo/cookbooks/java/attributes/default
 # 3.2 using custom cookbook (cookbooks_test)
 # knife cookbook create sample -o /home/vagrant/chef-repo/cookbooks_test
 cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test /home/vagrant/chef-repo/cookbooks_test
+rm -Rf /home/vagrant/chef-repo/data_bags
+cp -Rf /vagrant/resources/chef-client/chef-repo/data_bags /home/vagrant/chef-repo/data_bags
+
+knife data bag create test
+knife data bag from file test ../data_bags/test/dev.json
 
 # 4. upload the test cookbook
 knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks_test
