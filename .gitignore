@@ -1,3 +1,5 @@
 /.vagrant/
 /.git/
 /.ssh/
+.DS_Store
+client

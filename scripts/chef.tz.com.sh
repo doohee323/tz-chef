@@ -29,6 +29,10 @@ wget https://packages.chef.io/files/stable/chef-server/12.14.0/ubuntu/16.04/chef
 sudo dpkg -i chef-server-core_12.14.0-1_amd64.deb
 sudo chef-server-ctl reconfigure
 
+# chefdk
+wget https://packages.chef.io/files/stable/chefdk/1.2.22/ubuntu/16.04/chefdk_1.2.22-1_amd64.deb
+sudo dpkg -i chefdk_1.2.22-1_amd64.deb
+
 sudo mkdir -p /vagrant/.ssh
 sudo chef-server-ctl user-create admin Dewey Hong admin@gmail.com 'admin123' --filename /vagrant/.ssh/admin.pem
 sudo chef-server-ctl org-create topzone 'topzone.com' --association_user admin --filename /vagrant/.ssh/topzone-validator.pem
@@ -71,5 +75,9 @@ cd /vagrant/resources/chef-client/chef-repo/.chef
 
 # knife command works fine under .chef directory without any env. configuration. 
 knife client list
+
+
+chef generate repo chef-repo2
+
 
 exit 0

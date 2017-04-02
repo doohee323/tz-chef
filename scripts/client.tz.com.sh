@@ -44,11 +44,27 @@ cd $PROJ_DIR
 wget https://packages.chef.io/files/stable/chef/12.19.36/ubuntu/16.04/chef_12.19.36-1_amd64.deb
 sudo dpkg -i chef_12.19.36-1_amd64.deb
 
-sudo rm -Rf /home/vagrant/chef-repo
-sudo cp -Rf /vagrant/resources/chef-client/chef-repo /home/vagrant
-sudo chown -Rf vagrant:vagrant /home/vagrant/chef-repo
+# get chef-base 
+# https://github.com/cookbooks
+rm -Rf /home/vagrant/chef-repo/*
+rm -Rf /home/vagrant/chef-repo/.git
+rm -Rf /home/vagrant/chef-repo/.chef
+rm -Rf /home/vagrant/chef-repo/.chef-repo.txt
+rm -Rf /home/vagrant/chef-repo/.gitignore
 
-cd /home/vagrant/chef-repo/.chef
+cd /home/vagrant
+git clone https://github.com/chef/chef-repo.git
+sudo chef generate repo chef-repo
+cd /home/vagrant/chef-repo
+git config --global user.name "Dewey Hong"
+git config --global user.email "doohee323@gmail.com"
+echo ".chef" >> /home/vagrant/chef-repo/.gitignore
+git add .
+git commit -m 'init'
+
+# copy .chef
+cp -Rf /vagrant/resources/chef-client/chef-repo/.chef /home/vagrant/chef-repo/.chef
+sudo chown -Rf vagrant:vagrant /home/vagrant/chef-repo
 
 # for run as root account
 sudo rm -Rf /root/.chef
@@ -64,6 +80,7 @@ cd /home/vagrant/chef-repo/.chef
 # 1. create a client
 export EDITOR=vi
 knife client create client.tz.com -a -f /home/vagrant/chef-repo/.chef/client.tz.com.pem
+#knife client delete exampleorg2 -y
 knife client list
 
 # 2. create a node
@@ -71,15 +88,30 @@ sudo chef-client -c /home/vagrant/chef-repo/.chef/client.rb -N client.tz.com
 
 # 3. create a test cookbook
 # knife cookbook create sample -o /home/vagrant/chef-repo/cookbooks_test
-sudo mkdir -p /home/vagrant/chef-repo/cookbooks_test
-sudo rm -Rf /home/vagrant/chef-repo/cookbooks_test/sample
-sudo cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test/sample /home/vagrant/chef-repo/cookbooks_test/sample
+
+# 3.1 using public cookbook
+cd /home/vagrant/chef-repo/.chef
+knife cookbook site search java
+knife cookbook site show java
+knife cookbook site show java 1.8.0
+knife cookbook site download java 1.8.0
+knife cookbook site install java 1.8.0
+
+# 3.2 using custom cookbook (cookbooks_test)
+cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test /home/vagrant/chef-repo/cookbooks_test
 
 # 4. upload the test cookbook
 knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks_test
+knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks
 
 # 5. add a recipe to the node(client.tz.com)
+#knife cookbook delete java
+
 knife node run_list add client.tz.com 'recipe[sample]'
+knife node run_list add client.tz.com 'recipe[example]'
+knife node run_list add client.tz.com 'recipe[ohai]'
+knife node run_list add client.tz.com 'recipe[java]'
+#knife node run_list remove client.tz.com 'recipe[java]'
 #knife node edit node01
 
 sudo chef-client
