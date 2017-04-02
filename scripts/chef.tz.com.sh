@@ -76,8 +76,4 @@ cd /vagrant/resources/chef-client/chef-repo/.chef
 # knife command works fine under .chef directory without any env. configuration. 
 knife client list
 
-
-chef generate repo chef-repo2
-
-
 exit 0
