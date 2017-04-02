@@ -2,11 +2,19 @@ This is a Chef-server & Chef-client example on vagrant.
 ==========================================================================
 
 # Features
+	1. make chef-server, chef-client
+	2. make org, user, client, node
+	3. get public cookbook, make custom cookbook
+	4. upload cookbook and assign it to a node
+	5. run chef-client
 
 # Execution
+	mkdir -p ~/tz-chef/client/chef-repo
+	
 	vagrant destroy -f && vagrant up
 	
 # Run
 	https://192.168.82.170
+	
 	admin / admin123
 

@@ -18,9 +18,6 @@ echo '' >> /etc/hosts
 echo '192.168.82.170    chef.tz.com' >> /etc/hosts
 echo '192.168.82.171    client.tz.com' >> /etc/hosts
 
-#sed -i "s/vagrant/#vagrant/g" /etc/passwd
-#sudo sh -c "echo 'vagrant:x:1000:1000:vagrant,,,:/vagrant/client:/bin/bash' >> /etc/passwd"
-
 sudo apt-get update
 
 # make ssh key
@@ -87,17 +84,18 @@ knife client list
 sudo chef-client -c /home/vagrant/chef-repo/.chef/client.rb -N client.tz.com
 
 # 3. create a test cookbook
-# knife cookbook create sample -o /home/vagrant/chef-repo/cookbooks_test
 
 # 3.1 using public cookbook
-cd /home/vagrant/chef-repo/.chef
 knife cookbook site search java
 knife cookbook site show java
 knife cookbook site show java 1.8.0
 knife cookbook site download java 1.8.0
 knife cookbook site install java 1.8.0
+# change default version
+sed -i "s/ '6'/ '8'/g" /home/vagrant/chef-repo/cookbooks/java/attributes/default.rb
 
 # 3.2 using custom cookbook (cookbooks_test)
+# knife cookbook create sample -o /home/vagrant/chef-repo/cookbooks_test
 cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test /home/vagrant/chef-repo/cookbooks_test
 
 # 4. upload the test cookbook
@@ -108,7 +106,6 @@ knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks
 #knife cookbook delete java
 
 knife node run_list add client.tz.com 'recipe[sample]'
-knife node run_list add client.tz.com 'recipe[example]'
 knife node run_list add client.tz.com 'recipe[ohai]'
 knife node run_list add client.tz.com 'recipe[java]'
 #knife node run_list remove client.tz.com 'recipe[java]'
@@ -116,6 +113,8 @@ knife node run_list add client.tz.com 'recipe[java]'
 
 sudo chef-client
 
+# verify result
+java -version
 head /tmp/herp.conf
 
 exit 0
