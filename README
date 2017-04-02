@@ -8,6 +8,17 @@ This is a Chef-server & Chef-client example on vagrant.
 	4. upload cookbook and assign it to a node
 	5. run chef-client
 
+# Usecase
+	1. create a client
+	2. create a node
+	3. create a test cookbook
+		3.1 using public cookbook
+		3.2 using custom cookbook (cookbooks_test)
+		3.3 databag
+		3.4 environment
+	4. upload the test cookbook
+	5. add a recipe to the node(client.tz.com)	
+
 # Execution
 	mkdir -p ~/tz-chef/client/chef-repo
 	
