@@ -14,9 +14,17 @@ Chef::Log.warn "=====================dev2: #{dev2} ================="
 Chef::Log.warn "=====================ids: #{dev2["id"]} ================="
 
 template "/tmp/herp.conf" do
-  source "herp.conf.erb"
-  variables :username => "myapp", :password => dev1["bind_ip"]
-  mode "0644"
+	source "herp.conf.erb"
+	variables :username => "myapp", :password => dev1["bind_ip"]
+	mode "0644"
 end
 
+case node.chef_environment
+when "_default"
+	Chef::Log.warn "=====================_default!!! ================="
+when "prod"
+	Chef::Log.warn "=====================prod: #{node['java']['version']} ================="
+when "development"
+	Chef::Log.warn "=====================development: #{node['java']['version']} ================="
+end
   

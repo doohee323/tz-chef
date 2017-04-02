@@ -100,8 +100,21 @@ cp -Rf /vagrant/resources/chef-client/chef-repo/cookbooks_test /home/vagrant/che
 rm -Rf /home/vagrant/chef-repo/data_bags
 cp -Rf /vagrant/resources/chef-client/chef-repo/data_bags /home/vagrant/chef-repo/data_bags
 
+# 3.3 databag
 knife data bag create test
 knife data bag from file test ../data_bags/test/dev.json
+
+# 3.4 environment
+knife environment create development
+knife environment create prod
+
+knife environment from file ../environments/development.json
+knife environment from file ../environments/prod.json
+
+#knife node edit client.tz.com
+#"name": "client.tz.com",
+#  "chef_environment": "_default",
+# => "chef_environment": "development",
 
 # 4. upload the test cookbook
 knife cookbook upload -a -o /home/vagrant/chef-repo/cookbooks_test
